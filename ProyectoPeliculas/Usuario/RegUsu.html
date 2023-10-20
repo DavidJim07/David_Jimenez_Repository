@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/bootstrap.min.css">
+    <script defer src="http://app.embed.im/snow.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>  
+    <title>Regiatro de Administradores</title>
+</head>
+<body>
+    <div class="container" id="registro">
+        <h3>REGISTRO</h3>          
+        Nombre:  <input type='text' v-model='nombre' class="form-control" /><br>
+        Apellido Paterno:  <input type='text' v-model='paterno' class="form-control" /><br>
+        Apellido Materno:  <input type='text' v-model='materno' class="form-control" /><br>
+        Fecha de nacimiento:  <input type='date' v-model='nacimiento' class="form-control" /><br>
+        Pais:  <input type='text' v-model='pais' class="form-control" /><br>
+        Ciudad:  <input type='text' v-model='ciudad' class="form-control" /><br>
+        Numero de Telefono:  <input type='number' v-model='telefono' class="form-control" /><br>
+        Correo:  <input type='email' v-model='correo' class="form-control" /><br>
+        <div class="alert alert-dismissible alert-danger" v-if="this.existeusu()">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" @click="limpiarcorreo()"></button>
+            <strong>Cuidado!!!</strong>{{mensaje2}}
+        </div>
+        Contraseña:  <input type='password' v-model='contra' class="form-control" /><br>
+                
+        <button type='submit' class="btn btn-success m-md-2"  @click="guardarusuario()">Guardar Usuario</button>
+        <button type='reset' class="btn btn-dark m-md-2" >Limpiar Cajas</button>
+        <a href="login.html" type='reset' class="btn btn-dark" >Regresar</a> 
+    </div>
+</body>
+<script>
+    const registro = Vue.createApp({
+        data() {
+            return {
+                mensaje2:"",
+                nombre:"",
+                paterno:"",
+                materno:"",
+                nacimiento:"",
+                pais:"",
+                ciudad:"",                
+                telefono: "",
+                correo: "",
+                contra: "",
+                persona:[]
+
+                
+            }
+        },
+        methods:{
+            limpiarcorreo(){
+                this.correo="";
+            },
+            guardarusuario() {
+                if(localStorage.getItem('usuarios')==null){
+                if (!this.existeusu()) {
+                    this.persona.push({nombre: this.nombre, paterno: this.paterno, materno: this.materno, nacimiento: this.nacimiento, pais: this.pais,
+                        ciudad: this.ciudad, telefono: this.telefono, correo: this.correo, contra: this.contra, cargo:'usuario' });
+                    this.nombre = "";
+                    this.paterno = "";
+                    this.materno = "";
+                    this.nacimiento="";
+                    this.pais="";
+                    this.ciudad="";
+                    this.correo="";
+                    this.telefono="";
+                    this.contra="";
+                    localStorage.setItem("usuarios", JSON.stringify(this.persona));
+                    window.location.replace("login.html");
+                    
+                }
+            }else{
+                if (!this.existeusu()) {
+                    this.persona=[];
+                    let nuevo = JSON.parse(localStorage.getItem("usuarios"));
+                    for (const key in nuevo) {
+                        this.persona[key] = nuevo[key];
+                    }
+                    this.persona.push({nombre: this.nombre, paterno: this.paterno, materno: this.materno, nacimiento: this.nacimiento, pais: this.pais,
+                        ciudad: this.ciudad, telefono: this.telefono, correo: this.correo, contra: this.contra, cargo:'usuario' });
+                    this.nombre = "";
+                    this.paterno = "";
+                    this.materno = "";
+                    this.nacimiento="";
+                    this.pais="";
+                    this.ciudad="";                    
+                    this.correo="";
+                    this.telefono="";
+                    this.contra="";
+                    localStorage.setItem("usuarios", JSON.stringify(this.persona));
+                    window.location.replace("login.html");
+                }
+
+            }
+            },
+            existeusu() {
+                this.persona=[];
+                    let nuevo = JSON.parse(localStorage.getItem("usuarios"));
+                    for (const key in nuevo) {
+                        this.persona[key] = nuevo[key];
+                    }
+                this.existedosusu();
+                return this.persona.some(element=>element.correo==this.correo);
+            
+            
+            },
+            existedosusu(){
+                this.persona=[];
+                    let nuevo = JSON.parse(localStorage.getItem("usuarios"));
+                    for (const key in nuevo) {
+                        this.persona[key] = nuevo[key];
+                    }
+                if(this.persona.some(element=>element.correo==this.correo)){
+                    this.mensaje2="Ya existe este Usuario con el mismo correo";
+                }else{
+                    this.mensaje2="";
+                }
+            }
+
+        }
+    }).mount("#registro");
+</script>
+</html>

@@ -1,0 +1,10 @@
+Alimento
+Bebida
+Conservas
+Artículos Domésticos
+Suministros Electrónicos
+Medicamentos y Prodcutos Farmacéuticos
+Artículos Limpieza
+Artículos de Aseo Personal
+Papelería
+Ferretería

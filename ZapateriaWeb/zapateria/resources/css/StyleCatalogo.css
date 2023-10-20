@@ -1,0 +1,15 @@
+body {
+  background-color: #f0e0d1; 
+}
+
+.custom-list {
+    font-family: "Times New Roman", sans-serif; 
+    font-weight: lighter;
+    font-size: 20px; 
+}
+
+.custom-carrito {
+    font-family: "Times New Roman", sans-serif; 
+    font-weight: lighter;
+    font-size: 15px; 
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/bootstrap.min.css">
+    <script defer src="http://app.embed.im/snow.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>  
+    <title>Cambiar Contraseña</title>
+</head>
+<body>
+    <div class="container" id="registro">
+        <h3>Modificar Contraseña</h3>          
+
+        Correo:  <input type='email' v-model='correo' class="form-control" /><br>
+        <div class="alert alert-dismissible " v-if="this.existeusu()">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" @click="limpiarcorreo()"></button>
+            <strong></strong>{{mensaje2}}
+        </div>
+        Contraseña:  <input type='password' v-model='contra' class="form-control" /><br>
+                
+        <button type='submit' class="btn btn-success m-md-2"  @click="cambiar()">Guardar Usuario</button>
+        <a href="login.html" type='reset' class="btn btn-dark" >Regresar</a> 
+    </div>
+    
+</body>
+<script>
+    const registro = Vue.createApp({
+        data() {
+            return {
+                mensaje2:"",
+                correo: "",
+                contra: "",
+                persona:[]                
+            }
+        },
+        methods:{
+            limpiarcorreo(){
+                this.correo="";
+            },
+            cambiar() {
+                this.persona=[];
+                let nuevo = JSON.parse(localStorage.getItem("usuarios"));
+                for (const key in nuevo) {
+                    this.persona[key] = nuevo[key];
+                }
+                
+                const indice = this.persona.findIndex((elemento, indice) => {
+                if (elemento.correo == this.correo) {
+                    return true;
+                }
+                });
+                console.log(indice);
+                this.persona[indice].contra = this.contra;
+                alert("Contraseña Modificada")
+                this.persona[indice]=this.persona[indice];
+                localStorage.setItem("usuarios", JSON.stringify(this.persona));
+                window.location.replace("login.html");
+
+                
+                
+            
+            },
+            existeusu() {
+                this.persona=[];
+                    let nuevo = JSON.parse(localStorage.getItem("usuarios"));
+                    for (const key in nuevo) {
+                        this.persona[key] = nuevo[key];
+                    }
+                this.existedosusu();
+                return this.persona.some(element=>element.correo==this.correo);
+            
+            
+            },
+            existedosusu(){
+                this.persona=[];
+                    let nuevo = JSON.parse(localStorage.getItem("usuarios"));
+                    for (const key in nuevo) {
+                        this.persona[key] = nuevo[key];
+                    }
+                if(this.persona.some(element=>element.correo==this.correo)){
+                    this.mensaje2="Correo correcto";
+                }else{
+                    this.mensaje2="El correo no coincide";
+                }
+            }
+
+        }
+    }).mount("#registro");
+</script>
+</html>

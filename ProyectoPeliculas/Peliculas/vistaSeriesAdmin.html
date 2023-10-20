@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/bootstrap.min.css">
+    <script defer src="http://app.embed.im/snow.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>  
+    <title>Document</title>
+</head>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">STREMDC</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor02">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="pelisadmin.html">Peliculas </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="seriesAdmin.html">Series </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Registros</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../Usuario/RegAdm.html">Usuario</a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        
+        <a class="btn btn-secondary " type="submit" href="../Usuario/login.html">Cerrar Sesion</a>
+      </form>
+    </div>
+  </div>
+</nav>
+<body>
+    <div id="div1" class="container"></div>
+    <div id="tablaCapitulos" class="container"></div>
+    <div id="div2" class="container">
+        <button type="submit" class="btn btn-primary" onclick="regresar()">Regresar</button></div>
+</body>
+<script>
+    listaPeliculas = [];
+    let nuevo = JSON.parse(localStorage.getItem("series"));
+    for (const key in nuevo) {
+      listaPeliculas[key] = nuevo[key];
+    }
+    //console.log(window.listaPeliculas);
+    let id = localStorage.getItem("identificador");
+    //console.log(id);
+    let nose=listaPeliculas[id].pelicula;
+    console.log(nose);
+    let salida = `<h1>${listaPeliculas[id].titulo}</h1>
+        <img src="${listaPeliculas[id].imagen}" width="150" height="200"/>
+      <h5>Temporadas: ${listaPeliculas[id].temporadas} <br> 
+           F.Estreno: ${listaPeliculas[id].estreno.toUpperCase()} <br> 
+          Categorias: ${mostrarCategorias(listaPeliculas[id].categorias).toUpperCase()} <br> 
+         Sinopsis: ${listaPeliculas[id].sinopsis}</h5>
+         <br><br>
+         `;
+         mostrarCapitulos(listaPeliculas[id].capitulos,id)
+
+    document.getElementById("div1").innerHTML=salida;
+    function regresar(){
+        //storage.removeItem("identificador");
+        window.location.replace("seriesAdmin.html");
+    }
+    function mostrarCategorias(arreglo){
+        let salida="";
+        for(let i=0; i<arreglo.length; i++){
+        if(i==arreglo.length-1){
+            salida+=arreglo[i];
+        }else{
+            salida+=arreglo[i]+", ";
+        }
+        }
+        return salida;
+    }
+    function cerrar(){
+      alert("hola");
+      window.location.replace("/Usuario/login.html");
+    }
+    
+    function mostrarCapitulos(arreglo, pos) {
+        let salida="";
+        for(i=0; i<arreglo.length; i++){
+            if(arreglo[i].length<=0){
+                salida+="<br><h2>Temporada "+(i+1)+": sin capitulos aún.</h2>";
+            }else{
+                salida +="<br><table class='table'> <thead><tr><th scope='col'>Número</th> <th scope='col'>Titulo</th> <th scope='col'>Duración</th> <th scope='col'>Estreno</th>  <th scope='col'>   </th> </tr></thead><tbody>";
+                for(j=0; j<arreglo[i].length; j++){
+                    salida += `<tr>
+                    <td>${arreglo[i][j].numeroCapitulo}</td>
+                    <td>${arreglo[i][j].titulo.toUpperCase()}</td>
+                    <td>${arreglo[i][j].duracion.toUpperCase()}</td>
+                    <td>${arreglo[i][j].estreno.toUpperCase()}</td>
+                    <td> <button class="btn btn-danger" onclick='verCapitulo(${pos},${i},${j})'>Ver Capitulo</button>
+                    </tr>`;
+                }
+                salida+="</tbody></table>"
+            }
+        }
+        document.getElementById("tablaCapitulos").innerHTML = salida; 
+    }
+
+    function verCapitulo(posicion, temporada, capitulo){
+       let array =[];
+       array.push(posicion);
+       array.push(temporada);
+       array.push(capitulo);
+        localStorage.setItem("capitulo", array);
+        window.location.replace("verCapitulo.html"); 
+    }
+</script>
+</html>

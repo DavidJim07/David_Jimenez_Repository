@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/bootstrap.min.css">
+    <script defer src="http://app.embed.im/snow.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Document</title>
+</head>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">STREMDC</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarColor02">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="pelisadmin.html">Peliculas </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="seriesAdmin.html">Series </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="registrarPelicula.html">Registros</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../Usuario/RegAdm.html">Usuario</a>
+          </li>
+        </ul>
+        <form class="d-flex">
+            <a class="btn btn-secondary " type="submit" href="../Usuario/login.html">Cerrar Sesion</a>
+        </form>
+      </div>
+    </div>
+  </nav>
+<body >
+    <br>
+    <div class="container-fluid" id="panelprincipal" name="panelprincipal">
+        <div class="card">
+            <div class="card-header" >
+                Registro de peliculas
+            </div>
+            <div class="card-body">
+                <div class="row">
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label class="form-label" >Titulo de la pelicula</label>
+                        <input type="text" class="form-control" id="titulo" name="titulo">
+                    </div>
+                    <div class="mb-3">
+                        <label  class="form-label">Categorias de la pelicula</label><br>
+                        <input id="ciencia" type="checkbox" onclick="validarSelectores('ciencia')"/>Ciencia Ficción<br>
+                        <input id="accion" type="checkbox" onclick="validarSelectores('accion')"/>Acción<br>
+                        <input id="comedia" type="checkbox" onclick="validarSelectores('comedia')"/>Comedia <br>
+                        <input id="fantasia" type="checkbox" onclick="validarSelectores('fantasia')"/>Fantasía <br>
+                        <input id="drama" type="checkbox" onclick="validarSelectores('drama')"/>Drama/Melodrama <br>
+                        <input id="musical" type="checkbox" onclick="validarSelectores('musical')"/>Musical <br>
+                        <input id="romantico" type="checkbox" onclick="validarSelectores('romantico')"/>Romántico <br>
+                        <input id="terror" type="checkbox" onclick="validarSelectores('terror')"/>Suspenso/Terror <br>
+                    </div>
+                    <div class="mb-3">
+                        <label  class="form-label">Duración de la pelicula</label>
+                        <input type="text" class="form-control" id="duracion" name="duracion">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label  class="form-label">Fecha de estreno</label>
+                        <input type="date" class="form-control" id="estreno" name="estreno">
+                    </div>
+                    <div class="mb-3">
+                        <label  class="form-label">Sinopsis</label>
+                        <textarea class="form-control" id="sinopsis" name="sinopsis" rows="2"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label  class="form-label">Imagen</label>
+                        <input type="text" class="form-control" placeholder="URL de la imagen de la pelicula" id="imagen" name="imagen">
+                    </div>
+                    <div class="mb-3">
+                        <label  class="form-label">Pelicula</label>
+                        <input type="text" class="form-control" placeholder="URL del video de la pelicula" id="pelicula" name="pelicula">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <button type="button" id='modificar' name='modificar' style="display:none" onclick="updatePelicula()" class="btn btn-success">Modificar</button>
+                    <button type="button" id='cancelar' name='cancelar' style="display:none" onclick="cancelarPelicula()" class="btn btn-warning">Cancelar</button>
+                    <button type='submit' id='guardar' name='guardar' class="btn btn-success" onclick="agregarPelicula()">Guardar pelicula</button>  
+                    <button type='reset' id='limpiar' name='limpiar' class="btn btn-warning" onclick="limpiarPeliculas()">Limpiar cajas</button>
+                    <a id='listar' name='listar' class="btn btn-danger" onclick="mostrarPeliculas()">Listar</a>
+                    <input type="text" id='pos' name='pos' value="" hidden>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div id="tablaPeliculas" name="tablaPeliculas"></div>
+</body>
+<script src="peliculas.js"></script>
+</html>

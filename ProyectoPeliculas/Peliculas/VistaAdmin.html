@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/bootstrap.min.css">
+    <script defer src="http://app.embed.im/snow.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>  
+    <title>Document</title>
+</head>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">STREMDC</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor02">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="pelisadmin.html">Peliculas </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="seriesAdmin.html">Series </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Registros</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../Usuario/RegAdm.html">Usuario</a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        
+        <a class="btn btn-secondary " type="submit" href="../Usuario/login.html">Cerrar Sesion</a>
+      </form>
+    </div>
+  </div>
+</nav>
+<body>
+    <div id="div1" class="container"></div>
+</body>
+<script>
+    listaPeliculas = [];
+    let nuevo = JSON.parse(localStorage.getItem("peliculas"));
+    for (const key in nuevo) {
+      listaPeliculas[key] = nuevo[key];
+    }
+    //console.log(window.listaPeliculas);
+    let id = localStorage.getItem("identificador");
+    //console.log(id);
+    let nose=listaPeliculas[id].pelicula;
+    console.log(nose);
+    let salida = `<h1>${listaPeliculas[id].titulo}</h1>
+        <img src="${listaPeliculas[id].imagen}" width="150" height="200"/>
+      <h5>Duración: ${listaPeliculas[id].duracion.toUpperCase()} <br> 
+         F.Estreno: ${listaPeliculas[id].estreno.toUpperCase()} <br> 
+         Categorias: ${mostrarCategorias(listaPeliculas[id].categorias).toUpperCase()} <br> 
+         Sinopsis: ${listaPeliculas[id].sinopsis}</h5>
+         <iframe src="${nose}" width="1500" height="720"></iframe>
+         <br><br>
+         <button type="submit" class="btn btn-primary" onclick="regresar()">Regresar</button>
+         `;
+
+    document.getElementById("div1").innerHTML=salida;
+    function regresar(){
+        //storage.removeItem("identificador");
+        window.location.replace("pelisadmin.html");
+    }
+    function mostrarCategorias(arreglo){
+        let salida="";
+        for(let i=0; i<arreglo.length; i++){
+        if(i==arreglo.length-1){
+            salida+=arreglo[i];
+        }else{
+            salida+=arreglo[i]+", ";
+        }
+        }
+        return salida;
+    }
+    function cerrar(){
+      alert("hola");
+      window.location.replace("/Usuario/login.html");
+    }
+</script>
+</html>

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es">
+    <head>        
+        <meta charset="utf-8">        
+        <title> Formulario de Acceso </title>        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">       
+        <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" href="../CSS/login.css">
+        <script defer src="http://app.embed.im/snow.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>  
+    </head>
+    
+    <body>
+        <div id="contenedor">            
+            <div id="contenedorcentrado">
+                <div id="login">
+                    <div id="loginform">
+                        <label for="usuario">Correo Electronico</label>
+                        <input v-model="usuario" type="text">
+                        
+                        <label for="password">Contraseña</label>
+                        <input v-model="contra" type="password">
+                        
+                        <button type="submit"  name="Ingresar" @click="iniciar()">Iniciar Sesion</button>
+                    </div>
+
+                    
+                </div>
+                <div id="derecho">
+                    <div class="titulo">
+                        Bienvenido
+                    </div>
+                    <hr>
+                    <div class="pie-form">
+                        <a href="recuperar.html">¿Perdiste tu contraseña?</a>
+                        <a href="RegUsu.html">¿No tienes Cuenta? Registrate</a>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </body>
+    <script>
+        const loginform = Vue.createApp({
+            data() {
+                return {
+                    mensaje1:"",
+                    mensaje2:"",
+                    usuario:"",
+                    contra:"",
+                    persona:[],
+                    inicio:[]
+    
+                    
+                }
+            },
+            methods:{
+
+                limpiarcorreo(){
+                    this.usuario="";
+                    this.contra="";
+                },
+
+                iniciar() {
+                    localStorage.removeItem("sesion");
+                    this.persona=[];
+                        let nuevo = JSON.parse(localStorage.getItem("usuarios"));
+                        for (const key in nuevo) {
+                            this.persona[key] = nuevo[key];
+                        }                                      
+                    
+                    if (this.persona.some(element=>element.correo==this.usuario && element.contra==this.contra && element.cargo=="administrador") ){
+                        this.inicio.push({correo:this.usuario, cargo:"administrador" });
+                        localStorage.setItem("sesion", JSON.stringify(this.inicio));
+                        window.location.href="../Peliculas/pelisadmin.html";
+                    }else if(this.persona.some(element=>element.correo==this.usuario && element.contra==this.contra && element.cargo=="usuario")){
+                        this.inicio.push({correo:this.usuario, cargo:"usuario" });
+                        localStorage.setItem("sesion", JSON.stringify(this.inicio));
+                        window.location.href="../Peliculas/peliculas.html";
+                    }else if(this.usuario=="" || this.contra==""){
+                        alert("Campos vacios")
+                        
+                    }else{
+                        this.usuario="";
+                        this.contra="";
+                        alert("Credenciales de acceso incorrectas");
+                        
+                    }
+                
+            }      
+                
+    
+            }
+        }).mount("#loginform");
+    
+    </script>
+</html>

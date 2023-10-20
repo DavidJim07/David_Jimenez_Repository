@@ -1,0 +1,19 @@
+Lata
+Botella de plastico
+Botella de vidrio
+Frasco de vidrio
+Frasco de plastico
+Envases Flexibles
+Carton
+Plastico
+Bolsa
+Caja de carton
+Bulto
+Paquete
+Capsulas
+Cilindro
+Barra
+Sobre
+Garrafa
+Rollo
+Bote

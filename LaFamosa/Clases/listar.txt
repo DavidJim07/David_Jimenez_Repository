@@ -1,0 +1,18 @@
+Errores
+1.- Persona no tiene la calle
+2.- Proveedor no tiene acceso a colonia solamente datos como calle, numero y orientacion
+3.- Proveedor ni tienda tienen orientación
+
+proveedor agregar oreintacion y llave foranea a colonia
+tiedna agregar orientacion
+datoenvio agregar orientaicon
+
+Dudas
+1.-La aplicación será como la de escritorio (para el jefe)
+2.-Se debe de generar las claves primarias en las tablas (cve_per, cve_col etc.)
+3.-Se deben agregar las acciones comunes (agregar,consultar, modificar y listar)
+
+--------
+el codigo postal puede generar busqueda y autocompletar (asi estado y ciudad no generan mas datos repetidos)
+mejorar manera de ingresar fechas de inicio y fin contrato ademas de horas de comida
+

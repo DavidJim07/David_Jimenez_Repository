@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/bootstrap.min.css">
+    <script defer src="http://app.embed.im/snow.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Document</title>
+</head>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">STREMDC</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarColor02">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="pelisadmin.html">Peliculas </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="seriesAdmin.html">Series </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="registrarPelicula.html">Registros</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../Usuario/RegAdm.html">Usuario</a>
+          </li>
+          
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-sm-2" type="search" id="search" placeholder="Buscar" onkeyup="searchBar()">
+          <a class="btn btn-secondary " type="submit" href="../Usuario/login.html">Cerrar Sesion</a>
+        </form>
+      </div>
+    </div>
+  </nav>
+<body>
+    <div id="vista">
+        <div class="container">
+            <div class="row">
+                <h2>Peliculas</h2>
+                <main id="items" class="col-sm row"></main>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="ScripDoomAdmin.js"></script>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="../CSS/bootstrap.min.css">
+    <script defer src="http://app.embed.im/snow.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>  
+    <title>Document</title>
+</head>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">STREMDC</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarColor02">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="/VistaAdmin.html">Inicio
+              <span class="visually-hidden">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../Peliculas/pelisadmin.html">Peliculas </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../Peliculas/seriesAdmin.html">Series </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../Peliculas/registrarPelicula.html">Registros</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="RegAdm.html">Registrar Usuario</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="listarusu.html">Listar Usuario</a>
+          </li>
+          <form class="d-flex">
+            <a class="btn btn-secondary " type="submit" href="../Usuario/login.html">Cerrar Sesion</a>
+          </form>
+        </ul>
+      </div>
+    </div>
+  </nav>
+<body>
+    <br>
+    <div class="container" id="listadousu">
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr class="table-active">
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Fecha de nacimiento</th>
+                    <th scope="col">Numero de Telefono</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Cargo</th>
+                    <th scope="col">Acciones</th>
+
+                </tr>
+            </thead>
+            <tbody class="table-striped" id="tablacuerpousu">
+
+            </tbody>
+        </table>
+    </div>
+</body>
+<script>
+    function eliminarusu(pos){
+        listaUsuario = [];
+        let nuevo = JSON.parse(localStorage.getItem("usuarios"));
+        for (const key in nuevo) {
+          listaUsuario[key] = nuevo[key];
+        }
+        listaUsuario.splice(pos, 1);
+        localStorage.setItem("usuarios", JSON.stringify(listaUsuario));
+        alert("Usuario eliminado exitosamente");
+        window.location.reload();
+    }
+
+  let salida = "";
+  document.getElementById("tablacuerpousu").innerHTML = "";
+  let pos = 0;
+  let nuevo = JSON.parse(localStorage.getItem("usuarios"));
+  if (nuevo) {
+    for (const n of nuevo) {
+      salida += `<tr class="table-light">
+    <td>${n.nombre} ${n.paterno} ${n.materno}</td>
+    <td>${n.nacimiento}</td>
+    <td>${n.telefono}</td>
+    <td>${n.correo}</td>
+    <td>${n.cargo}</td>
+    <td> <button class="btn btn-danger" onclick='eliminarusu(${pos})'>Eliminar</button></td>
+    </tr>`;
+      pos++;
+    }
+    document.getElementById("tablacuerpousu").innerHTML = salida;
+  } 
+
+</script>
+</html>
